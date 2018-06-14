@@ -1,39 +1,34 @@
-// if (process.argv.length < 3) {
-//     console.log('Usage: node ' + process.argv[1] + ' [FILENAME]');
-//     process.exit(1);
-//   }
-// var resultString = '';
-// let filename = process.argv[2];
-// let fs = require('fs');
-// let array = fs.readFileSync(filename).toString().split("\r\n");
-// // for(i in array) {
-// //     console.log(array[i]);
-// // }
-// for(let i = 1; i < array.length; i+=2) {
-//     resultString += array[i];
-// }
-// console.log(resultString);
-
-if (process.argv.length < 3) {
-    console.log('Usage: node ' + process.argv[1] + ' [FILENAME]');
-    process.exit(1);
-  }
-  // Read the file and print its contents.
-let fs = require('fs');
-let filename = process.argv[2];
-
-let resultString = '';
-
-fs.readFile(filename, 'utf-8', function(err, data) {
-    if(err) throw err;
-    let array = data.toString().split("\n");
+function formStringFromEvenLinesSync(filepath) {
+    var resultString = '';
+    let fs = require('fs');
+    let array = fs.readFileSync(filepath).toString().split("\r\n");
     // for(i in array) {
     //     console.log(array[i]);
     // }
-    for(let i = 1; i < array.length; i+=2) {
+    for (let i = 1; i < array.length; i += 2) {
         resultString += array[i];
-        // console.log(resultString);
     }
-    console.log(resultString);
-});
+    return resultString;
+}
 
+function formStringFromEvenLinesAsync(filepath) {
+    let resultString = '';
+    let fs = require('fs');
+    fs.readFile(filepath, 'utf-8', function (err, data) {
+        if (err) throw err;
+        let array = data.toString().split("\r\n");
+        for (i in array) {
+            if (i % 2 == 1) {
+                resultString += array[i];
+            }
+        }
+        // for(let i = 1; i < array.length; i+=2) {
+        //     resultString += array[i];
+        // }
+        console.log(resultString);
+    });
+}
+
+let filepath = process.argv[2] ? process.argv[2] : './data/1.txt';
+console.log(formStringFromEvenLinesSync(filepath));
+formStringFromEvenLinesAsync(filepath);

@@ -1,0 +1,13 @@
+{
+	"flag": true,
+	"myPromises": {"1":2},
+	"element": {"array":[]},
+	"screenshot": "null",
+	"elementText": "string",
+	"allElementsText": "tant",
+	"counter": -1,
+	"config": "timer",
+	"const": "FIRST",
+	"parameters": {},
+	"description": "qwertyuiopasdfghjkl"
+}
