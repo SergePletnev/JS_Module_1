@@ -6,4 +6,4 @@
 !.vscode/extensions.json
 .history
 
-npm_nodules/
+./npm_nodules/*
