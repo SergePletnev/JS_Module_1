@@ -1,17 +1,19 @@
 function formStringFromEvenLinesSync(filepath) {
     var resultString = '';
     let fs = require('fs');
-    let array = fs.readFileSync(filepath).toString().split("\r\n");
-    // for(i in array) {
-    //     console.log(array[i]);
-    // }
+    let array;
+    try {
+        array = fs.readFileSync(filepath).toString().split("\r\n");
+    } catch (err) {
+        throw err;
+    }
     for (let i = 1; i < array.length; i += 2) {
         resultString += array[i];
     }
     return resultString;
 }
 
-function formStringFromEvenLinesAsync(filepath) {
+function formStringFromEvenLinesAsync(filepath, callback) {
     let resultString = '';
     let fs = require('fs');
     fs.readFile(filepath, 'utf-8', function (err, data) {
@@ -22,13 +24,20 @@ function formStringFromEvenLinesAsync(filepath) {
                 resultString += array[i];
             }
         }
-        // for(let i = 1; i < array.length; i+=2) {
-        //     resultString += array[i];
-        // }
-        console.log(resultString);
+        callback(resultString);
     });
 }
 
 let filepath = process.argv[2] ? process.argv[2] : './data/1.txt';
+
 console.log(formStringFromEvenLinesSync(filepath));
-formStringFromEvenLinesAsync(filepath);
+
+// formStringFromEvenLinesAsync(filepath, function (data) {
+//     console.log(data);
+// });
+
+formStringFromEvenLinesAsync(filepath, logResult);
+
+function logResult(data) {
+    console.log(data);
+}
