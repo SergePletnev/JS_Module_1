@@ -59,7 +59,7 @@ function writeResult(result) {
     }
 }
 
-let filepath = process.argv[2] ? process.argv[2] : './data/3.json';
+let filepath = process.argv[2] ? process.argv[2] : './data/4.json';
 let obj = getObjectFromJSON(filepath);
 let result = checkObjectValues(obj);
 writeResult(result);
