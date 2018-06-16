@@ -1,5 +1,5 @@
 function formStringFromEvenLinesSync(filepath) {
-    var resultString = '';
+    let resultString = '';
     let fs = require('fs');
     let array;
     try {
