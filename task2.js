@@ -1,6 +1,11 @@
 function getObjectFromJSON(filepath) {
     const fs = require('fs');
-    let obj = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+    let obj;
+    try {
+        obj = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+    } catch (err) {
+        throw err;
+    }
     return obj;
 }
 

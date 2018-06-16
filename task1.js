@@ -32,6 +32,10 @@ let filepath = process.argv[2] ? process.argv[2] : './data/1.txt';
 
 console.log(formStringFromEvenLinesSync(filepath));
 
+// formStringFromEvenLinesAsync(filepath, function (data) {
+//     console.log(data);
+// });
+
 formStringFromEvenLinesAsync(filepath, logResult);
 
 function logResult(data) {
