@@ -9,7 +9,7 @@ function getObjectFromJSON(filepath) {
     return obj;
 }
 
-function checkObjectValues(obj) {
+function checkObjectValuesAndGetResult(obj) {
     let incorrectValues = {}
 
     if (typeof (obj.flag) !== 'boolean') {
@@ -61,5 +61,5 @@ function writeResult(result) {
 
 let filepath = process.argv[2] ? process.argv[2] : './data/4.json';
 let obj = getObjectFromJSON(filepath);
-let result = checkObjectValues(obj);
+let result = checkObjectValuesAndGetResult(obj);
 writeResult(result);

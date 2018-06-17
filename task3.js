@@ -1,18 +1,27 @@
-const readDir = require('readdir');
-const json2xls = require('json2xls');
-const fs = require('fs')
+function convertJSONFilesToXLSX(inputDir, outputDir) {
+    const readDir = require('readdir');
+    const json2xls = require('json2xls');
+    const fs = require('fs');
 
-let JSONFiles = readDir.readSync('./data', ['**.json'], readDir.ABSOLUTE_PATHS);
+    let JSONFiles = readDir.readSync(inputDir, ['**.json'], readDir.ABSOLUTE_PATHS);
 
-let jsonObjects = [];
-for (let i = 0; i < JSONFiles.length; i++) {
-    obj = JSON.parse(fs.readFileSync(JSONFiles[i], 'utf8'));
-    jsonObjects.push(obj);
+    let jsonObjects = [];
+    for (let i = 0; i < JSONFiles.length; i++) {
+        try {
+            obj = JSON.parse(fs.readFileSync(JSONFiles[i], 'utf8'));
+        } catch (err) {
+            console.log(err);
+            continue;
+        }
+        jsonObjects.push(obj);
+    }
+
+    let xls = json2xls(jsonObjects);
+    let xlsxFileName = 'JSONs.xlsx';
+    outputPath = outputDir + '/' + xlsxFileName;
+    fs.writeFileSync(outputPath, xls, 'binary');
 }
 
-let xls = json2xls(jsonObjects[0]);
+const args = require('yargs').argv;
 
-fs.writeFileSync('./data/JSONs.xlsx', xls, 'binary');
-
-
-// path as arguments in command line!!
+convertJSONFilesToXLSX(args.inputDir, args.outputDir);
