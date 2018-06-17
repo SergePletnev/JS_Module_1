@@ -2,7 +2,7 @@
   "name": "js_module_1",
   "version": "1.0.0",
   "description": "TA_Lab_JS_Module_1",
-  "main": "task1.js",
+  "main": "task3.js",
   "dependencies": {
     "json2xls": "^0.1.2",
     "npm": "^6.1.0",

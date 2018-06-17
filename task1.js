@@ -28,7 +28,7 @@ function formStringFromEvenLinesAsync(filepath, callback) {
     });
 }
 
-let filepath = process.argv[2] ? process.argv[2] : './data/1.txt';
+let filepath = process.argv[2] ? process.argv[2] : './data/test_data.txt';
 
 console.log(formStringFromEvenLinesSync(filepath));
 
