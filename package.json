@@ -4,9 +4,13 @@
   "description": "TA_Lab_JS_Module_1",
   "main": "task3.js",
   "dependencies": {
+    "axios": "^0.16.2",
     "json2xls": "^0.1.2",
+    "node-rest-client": "^3.1.0",
     "npm": "^6.1.0",
     "readdir": "^0.1.0",
+    "request": "^2.87.0",
+    "request-promise-native": "^1.0.5",
     "yargs": "^11.0.0"
   },
   "scripts": {

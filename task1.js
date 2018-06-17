@@ -25,6 +25,7 @@ function formStringFromEvenLinesAsync(filepath, callback) {
             }
         }
         callback(resultString);
+        return;
     });
 }
 
