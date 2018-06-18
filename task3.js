@@ -16,12 +16,21 @@ function convertJSONFilesToXLSX(inputDir, outputDir) {
         jsonObjects.push(obj);
     }
 
-    let xls = json2xls(jsonObjects);
-    let xlsxFileName = 'JSONs.xlsx';
-    outputPath = outputDir + '/' + xlsxFileName;
-    fs.writeFileSync(outputPath, xls, 'binary');
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir);
+    }
+    if (jsonObjects.length > 0) {
+        let xls = json2xls(jsonObjects);
+        let xlsxFileName = 'JSONs.xlsx';
+        outputPath = outputDir + '/' + xlsxFileName;
+        fs.writeFileSync(outputPath, xls, 'binary');
+        return 'Ok';
+    } else {
+        return 'There is no data to convert to xlsx';
+    }
 }
 
 const args = require('yargs').argv;
 
-convertJSONFilesToXLSX(args.inputDir, args.outputDir);
+let resultMessage = convertJSONFilesToXLSX(args.inputDir, args.outputDir);
+console.log(resultMessage);
