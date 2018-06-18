@@ -21,7 +21,7 @@ function checkObjectValuesAndGetResult(obj) {
     if (typeof (obj.element) !== 'object') {
         incorrectValues['element'] = obj.element;
     }
-    if (typeof (obj.screenshot) !== null) {
+    if (obj.screenshot !== null) {
         incorrectValues['screenshot'] = obj.screenshot;
     }
     if (typeof (obj.elementText) !== 'string') {
