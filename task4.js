@@ -13,8 +13,7 @@ function getCountryInformationPromiseAxious(countryCode) {
 
     axios.get(`http://services.groupkt.com/country/get/iso3code/${countryCode}`)
         .then(response => {
-            console.log(response.data);
-            console.log('');
+            logCountryInfo(response.data);
         })
         .catch(error => {
             console.log(error);
@@ -24,7 +23,7 @@ function getCountryInformationPromiseAxious(countryCode) {
 function getCountryInformationCallbackRequest(textToSearch, callback) {
     const request = require('request');
 
-    request(`http://services.groupkt.com/country/search?text=${textToSearch}`, (err, res, body) => {
+    request(`http://services.groupkt.com/country/search?text=${textToSearch}`, { json: true }, (err, res, body) => {
         if (err) {
             console.log(err);
             return;
@@ -36,25 +35,34 @@ function getCountryInformationCallbackRequest(textToSearch, callback) {
 
 function getCountryInformationPromiseRequest(textToSearch) {
     const rp = require('request-promise-native');
+    let options = {
+        uri: `http://services.groupkt.com/country/search?text=${textToSearch}`,
+        json: true
+    }
 
-    rp.get(`http://services.groupkt.com/country/search?text=${textToSearch}`)
-        .then(function (data) {
-            console.log(data);
-            console.log();
+    rp(options)
+        .then(data => {
+            logCountryInfo(data);
         })
         .catch(function (error) {
             console.log(error);
         });
 }
 
-function logCountryInfo(countryInfo) {
-    console.log(countryInfo);
-    console.log();
+function logCountryInfo(data) {
+    let countryInfo = data["RestResponse"]['result'];
+    let message = data["RestResponse"]['messages'];
+    if (countryInfo) {
+        console.log(countryInfo);
+        console.log();
+    } else {
+        console.log(message[0] + '\n');
+    }
 }
 
 const args = require('yargs').argv;
 
-let countryCode = args.country_code ? args.country_code : 'BE'
+let countryCode = args.country_code ? args.country_code : 'DE'
 let textToSearch = args.text_to_search ? args.text_to_search : 'bel'
 
 getCountryInformationCallbackNodeRestClient(countryCode, logCountryInfo);
