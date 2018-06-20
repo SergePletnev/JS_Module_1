@@ -1,8 +1,8 @@
-function convertJSONFilesToXLSX(inputDir, outputDir) {
-    const readDir = require('readdir');
-    const json2xls = require('json2xls');
-    const fs = require('fs');
+const readDir = require('readdir');
+const json2xls = require('json2xls');
+const fs = require('fs');
 
+function convertJSONFilesToXLSX(inputDir, outputDir) {
     let JSONFiles = readDir.readSync(inputDir, ['**.json'], readDir.ABSOLUTE_PATHS);
 
     let jsonObjects = [];
@@ -20,8 +20,8 @@ function convertJSONFilesToXLSX(inputDir, outputDir) {
         fs.mkdirSync(outputDir);
     }
     if (jsonObjects.length > 0) {
-        let xls = json2xls(jsonObjects);
-        let xlsxFileName = 'JSONs.xlsx';
+        const xls = json2xls(jsonObjects);
+        const xlsxFileName = 'JSONs.xlsx';
         outputPath = outputDir + '/' + xlsxFileName;
         fs.writeFileSync(outputPath, xls, 'binary');
         return 'Ok';

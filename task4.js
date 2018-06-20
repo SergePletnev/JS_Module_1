@@ -50,8 +50,8 @@ function getCountryInformationPromiseRequest(textToSearch) {
 }
 
 function logCountryInfo(data) {
-    let countryInfo = data["RestResponse"]['result'];
-    let message = data["RestResponse"]['messages'];
+    const countryInfo = data["RestResponse"]['result'];
+    const message = data.RestResponse.messages;          // as an another variant of syntax
     if (countryInfo) {
         console.log(countryInfo);
         console.log();
@@ -67,8 +67,8 @@ let textToSearch = args.text_to_search ? args.text_to_search : 'bel'
 
 getCountryInformationCallbackNodeRestClient(countryCode, logCountryInfo);
 
-getCountryInformationPromiseAxious(countryCode);
+// getCountryInformationPromiseAxious(countryCode);
 
-getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
+// getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
 
-getCountryInformationPromiseRequest(textToSearch);
+// getCountryInformationPromiseRequest(textToSearch);

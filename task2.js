@@ -1,5 +1,6 @@
+const fs = require('fs');
+
 function getObjectFromJSON(filepath) {
-    const fs = require('fs');
     let obj;
     try {
         obj = JSON.parse(fs.readFileSync(filepath, 'utf8'));
@@ -50,7 +51,6 @@ function checkObjectValuesAndGetResult(obj) {
 
 function writeResult(result) {
     if (Object.keys(result).length > 0) {
-        const fs = require('fs');
         let data = JSON.stringify(result, null, 2);
         let filepath = "./data/task2_result.txt";
         fs.writeFileSync(filepath, data);
@@ -59,7 +59,7 @@ function writeResult(result) {
     }
 }
 
-let filepath = process.argv[2] ? process.argv[2] : './data/4.json';
-let obj = getObjectFromJSON(filepath);
-let result = checkObjectValuesAndGetResult(obj);
+const filepath = process.argv[2] ? process.argv[2] : './data/4.json';
+const obj = getObjectFromJSON(filepath);
+const result = checkObjectValuesAndGetResult(obj);
 writeResult(result);

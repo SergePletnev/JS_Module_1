@@ -1,9 +1,16 @@
+const fs = require('fs');
+const { promisify } = require('util');
+const readFileAsync = promisify(fs.readFile);
+
+// const Bluebird = require('bluebird');
+// const fs = Bluebird.promisifyAll(require('fs'));
+
 function formStringFromEvenLinesSync(filepath) {
     let resultString = '';
-    let fs = require('fs');
     let array;
+
     try {
-        array = fs.readFileSync(filepath).toString().split("\r\n");
+        array = fs.readFileSync(filepath).split("\r\n");
     } catch (err) {
         throw err;
     }
@@ -15,25 +22,58 @@ function formStringFromEvenLinesSync(filepath) {
 
 function formStringFromEvenLinesAsync(filepath, callback) {
     let resultString = '';
-    let fs = require('fs');
-    fs.readFile(filepath, 'utf-8', function (err, data) {
+
+    fs.readFile(filepath, 'utf-8', (err, data) => {
         if (err) throw err;
-        let array = data.toString().split("\r\n");
-        for (i in array) {
-            if (i % 2 == 1) {
-                resultString += array[i];
-            }
-        }
+        data.split("\r\n").forEach((element, index) => {
+            if (index % 2 === 1) resultString += element;
+        });
+
         callback(resultString);
         return;
     });
+
 }
 
-let filepath = process.argv[2] ? process.argv[2] : './data/test_data.txt';
+function formStringFromEvenLinesPromise(filepath, callback) {
+    let resultString = '';
 
-console.log(formStringFromEvenLinesSync(filepath));
+    readFileAsync(filepath, 'utf-8')
+        .then(data => {
+            data.split("\r\n").forEach((element, index) => {
+                if (index % 2 === 1) resultString += element;
+            });
+            logResult(resultString);
+        })
+        .catch(err => {
+            throw err;
+        });
+}
 
-formStringFromEvenLinesAsync(filepath, logResult);
+async function formStringFromEvenLinesPromiseAsync(filePath) {
+    let resultString = '';
+
+    try {
+        const data = await readFileAsync(filePath, { encoding: 'utf8' });
+        data.split("\r\n").forEach((element, index) => {
+            if (index % 2 === 1) resultString += element;
+        });
+        logResult(resultString);
+    }
+    catch (err) {
+        console.log('ERROR:', err);
+    }
+}
+
+const filepath = process.argv[2] ? process.argv[2] : './data/task1_test_data.txt';
+
+// console.log(formStringFromEvenLinesSync(filepath));
+
+// formStringFromEvenLinesAsync(filepath, logResult);
+
+// formStringFromEvenLinesPromise(filepath, logResult);
+
+formStringFromEvenLinesPromise(filepath, logResult);
 
 function logResult(data) {
     console.log(data);
