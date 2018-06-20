@@ -1,17 +1,8 @@
 const fs = require('fs');
 
-function getObjectFromJSON(filepath) {
-    let obj;
-    try {
-        obj = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    } catch (err) {
-        throw err;
-    }
-    return obj;
-}
-
-function checkObjectValuesAndGetResult(obj) {
-    let incorrectValues = {}
+function checkJSONFileValuesAndGetResult(filepath) {
+    const obj = require(filepath);
+    let incorrectValues = {};
 
     if (typeof (obj.flag) !== 'boolean') {
         incorrectValues['flag'] = obj.flag;
@@ -60,6 +51,5 @@ function writeResult(result) {
 }
 
 const filepath = process.argv[2] ? process.argv[2] : './data/4.json';
-const obj = getObjectFromJSON(filepath);
-const result = checkObjectValuesAndGetResult(obj);
+const result = checkJSONFileValuesAndGetResult(filepath);
 writeResult(result);

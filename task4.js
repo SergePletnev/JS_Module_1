@@ -67,8 +67,8 @@ let textToSearch = args.text_to_search ? args.text_to_search : 'bel'
 
 getCountryInformationCallbackNodeRestClient(countryCode, logCountryInfo);
 
-// getCountryInformationPromiseAxious(countryCode);
+getCountryInformationPromiseAxious(countryCode);
 
-// getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
+getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
 
-// getCountryInformationPromiseRequest(textToSearch);
+getCountryInformationPromiseRequest(textToSearch);
