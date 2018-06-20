@@ -1,3 +1,5 @@
+'use strict';
+
 const readDir = require('readdir');
 const json2xls = require('json2xls');
 const fs = require('fs');
