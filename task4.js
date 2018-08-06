@@ -37,6 +37,7 @@ function getCountryInformationPromiseRequest(textToSearch) {
     const rp = require('request-promise-native');
     let options = {
         uri: `http://services.groupkt.com/country/search?text=${textToSearch}`,
+        resolveWithFullResponse: true,
         json: true
     }
 
@@ -50,8 +51,8 @@ function getCountryInformationPromiseRequest(textToSearch) {
 }
 
 function logCountryInfo(data) {
-    const countryInfo = data["RestResponse"]['result'];
-    const message = data.RestResponse.messages;          // as an another variant of syntax
+    const countryInfo = data.body.RestResponse.result;
+    const message = data.body.RestResponse.messages;
     if (countryInfo) {
         console.log(countryInfo);
         console.log();
@@ -65,10 +66,10 @@ const args = require('yargs').argv;
 let countryCode = args.country_code ? args.country_code : 'DE'
 let textToSearch = args.text_to_search ? args.text_to_search : 'bel'
 
-getCountryInformationCallbackNodeRestClient(countryCode, logCountryInfo);
+// getCountryInformationCallbackNodeRestClient(countryCode, logCountryInfo);
 
-getCountryInformationPromiseAxious(countryCode);
+// getCountryInformationPromiseAxious(countryCode);
 
-getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
+// getCountryInformationCallbackRequest(textToSearch, logCountryInfo);
 
 getCountryInformationPromiseRequest(textToSearch);
