@@ -35,7 +35,7 @@ function formStringFromEvenLinesAsync(filepath, callback) {
 
 }
 
-function formStringFromEvenLinesPromise(filepath, callback) {
+function formStringFromEvenLinesPromise(filepath) {
     let resultString = '';
 
     readFileAsync(filepath, 'utf-8')
