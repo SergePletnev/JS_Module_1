@@ -6,4 +6,6 @@
 !.vscode/extensions.json
 .history
 
+.idea/*
+
 node_modules/
